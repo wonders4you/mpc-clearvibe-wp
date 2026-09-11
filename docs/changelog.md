@@ -1,0 +1,15 @@
+# Changelog
+
+## 0.7.0 (Pre-release)
+
+- First public test build
+- Core plugin: 181 abilities, 20 categories
+- Add-ons: WooCommerce (113), GeneratePress (81), ACF (30), Elementor (50), Breakdance (44), CLI (2)
+- Total: 499+ abilities across 55 categories
+- Security: disabled-by-default dangerous categories, dangerous-action confirmation, out-of-band admin approval, per-post write locks, audit logging, secret redaction, scoped application passwords
+- MCP: HTTP transport, Application Password authentication, auto-generated annotations (readonly/destructive/idempotent)
+- Translations: English, Polish (pl_PL), Spanish (es_ES), French (fr_FR)
+
+---
+
+> This is a pre-release for testing. Things may break, APIs may change. See the [disclaimer](../README.md#disclaimer).
