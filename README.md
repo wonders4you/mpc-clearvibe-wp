@@ -1,8 +1,14 @@
-# MPC ClearVibe WP
+# MPC ClearVibe WP — WordPress MCP Server for AI Agents
 
 > **Beta — not for production use yet.** This is a public test build. Things may break, APIs may change. Feedback welcome via GitHub Issues.
 
 A WordPress plugin that turns your site into an **MCP server** — letting AI agents like Claude, Devin, Codex, Grok, and Cursor manage your WordPress site securely through the Model Context Protocol.
+
+## What Is This?
+
+MPC ClearVibe WP is a WordPress plugin that exposes your site to AI agents via the Model Context Protocol (MCP). Once installed, AI clients can read, create, modify, and delete content on your WordPress site — posts, pages, media, users, WooCommerce products, Elementor templates, and more.
+
+It uses the official WordPress Abilities API and works with any MCP-compatible client: Claude Desktop, Claude Code, Devin, Codex, Grok, Cursor, and other AI agents.
 
 ## What It Does
 
@@ -55,11 +61,77 @@ Install only the add-ons you need. Each is a separate plugin — install and act
 
 - [Installation Guide](docs/installation.md) — how to install core + add-ons
 - [MCP Setup Guide](docs/mcp-setup.md) — connect your AI agent to WordPress
+- [Agent Guide](docs/agent-guide.md) — copy-paste context for your AI agent (Claude, Codex, Cursor)
 - [Ability Reference](docs/abilities/) — full list of all 499+ abilities
 - [Categories](docs/categories.md) — category list, which are enabled/disabled by default
 - [Security Model](docs/security.md) — disabled categories, dangerous actions, audit log
 - [FAQ](docs/faq.md) — common questions
 - [Changelog](docs/changelog.md) — release history
+
+## Use Cases
+
+- **Content automation** — "Claude, write and publish a blog post about X" — the AI agent creates the post directly in WordPress
+- **WooCommerce management** — "List products with low stock and update prices" — the AI agent queries and updates WooCommerce
+- **Site maintenance** — "Check for plugin updates and update them" — the AI agent manages plugins and themes
+- **Bulk content editing** — "Find and replace old URLs across all posts" — the AI agent runs search-and-replace with dry-run preview
+- **Page builder workflows** — "Update the Elementor header template" — the AI agent edits builder content through dedicated abilities
+- **SEO optimization** — "Generate SEO meta descriptions for my latest 10 posts" — the AI agent reads posts and writes meta
+- **Site audits** — "Show me what changed on my site this week" — the AI agent queries the audit log
+- **Multisite management** — "Create a new subsite for the marketing team" — the AI agent manages multisite networks
+- **Multiple bots with scoped access** — give each AI agent only the abilities it needs (see MCP Bots below)
+
+## MCP Bots — Scoped Access for WordPress
+
+MPC ClearVibe WP lets you create **scoped application passwords** so each AI agent (bot) gets access only to the abilities it needs. This is the recommended way to connect AI agents to your WordPress site — instead of using an unrestricted admin password.
+
+### How It Works
+
+1. Go to **Settings → ClearVibe AI → MCP bots tab**
+2. Choose a WordPress user (the bot will act as this user — capability checks apply)
+3. Enter a bot name (e.g. `content-writer`, `woo-manager`, `seo-bot`)
+4. Select which categories and abilities the bot can use (checkboxes)
+5. Click **Generate** — you get a scoped application password
+6. Use that password in your AI client's MCP configuration
+
+### What Scoping Does
+
+- The bot can **only call abilities you selected** — all other abilities return a scope denial error
+- The bot **still needs the WordPress capability** for each ability (e.g. `publish_posts`) — scoping is an additional restriction, not a replacement
+- Passwords created in **Users → Profile** are **unrestricted** — they can call every enabled ability the user is allowed to use
+- Passwords created via **MCP bots** are **scoped** — they can only call the abilities you checked
+
+### Example: Two Bots with Different Access
+
+**Shop Manager bot** (WooCommerce only):
+- User: a Shop Manager account
+- Abilities: `for-woo-list-products`, `for-woo-get-product`, `for-woo-update-product`, `for-woo-update-stock`
+- Can: manage products and stock
+- Cannot: edit posts, manage plugins, access customers
+
+**Content Writer bot** (posts only):
+- User: an Author account
+- Abilities: `content-list-posts`, `content-get-post`, `content-create-post`, `content-update-post`
+- Can: read and write posts
+- Cannot: manage WooCommerce, plugins, users, system
+
+Each bot gets its own login + password. Configure each in a separate MCP client entry (or use the same client with different credentials).
+
+### Why Use Scoped Bots?
+
+- **Least privilege** — if a bot password leaks, the attacker can only do what the bot can do
+- **Separation of concerns** — a content bot can't accidentally delete plugins
+- **Audit clarity** — the audit log shows which bot did what (by user and password)
+- **Team access** — give different team members different bots with different scopes
+
+### Creating a Bot via MCP
+
+You can also create scoped passwords programmatically through the MCP protocol:
+
+```json
+{"ability_name":"mpc-clearvibe-wp/users-create-restricted-application-password","parameters":{"bot_name":"seo-bot","scopes":["content-list-posts","content-get-post","content-update-post"]}}
+```
+
+This returns a new application password with the specified scopes.
 
 ## Supported AI Clients
 
@@ -71,6 +143,56 @@ Any MCP-compatible client works:
 - **Grok** — xAI's assistant
 - **Cursor** — AI-powered IDE
 - **Any MCP-compatible CLI or tool**
+
+## FAQ
+
+### Is this a WordPress plugin?
+
+Yes. MPC ClearVibe WP is a WordPress plugin that exposes your site to AI agents via the Model Context Protocol. Install it like any other WordPress plugin.
+
+### Do I need the MCP Adapter?
+
+Yes. The [WordPress MCP Adapter](https://github.com/WordPress/mcp-adapter) is a separate plugin that bridges WordPress abilities to the MCP protocol. Download it from its repository.
+
+### Can Claude manage my WordPress site?
+
+Yes. Connect Claude Desktop or Claude Code to your WordPress site via MCP, and Claude can read, create, modify, and delete content — posts, pages, media, users, plugins, themes, and WooCommerce products.
+
+### Can Cursor manage WordPress?
+
+Yes. Cursor supports MCP servers. Configure the endpoint URL and Application Password in Cursor's MCP settings, and Cursor can manage your WordPress site.
+
+### Does it work with WooCommerce?
+
+Yes. The For-WooCommerce add-on adds 113 abilities for products, orders, coupons, shipping, tax, reports, customers, and more.
+
+### Does it work with Elementor?
+
+Yes. The For-Elementor add-on adds 50 abilities for templates, popups, kit settings, global colors, typography, and CSS cache.
+
+### Does it work with Breakdance?
+
+Yes. The For-Breakdance add-on adds 44 abilities for templates, builder content, global design, forms, and maintenance.
+
+### Does it work with GeneratePress?
+
+Yes. The For-GeneratePress add-on adds 85 abilities for theme settings, colors, typography, spacing, elements, GenerateBlocks, and custom CSS.
+
+### Does it work with ACF?
+
+Yes. The For-ACF add-on adds 30 abilities for field groups, fields, values, and options pages.
+
+### Is it safe?
+
+The plugin has multiple security layers: disabled-by-default dangerous categories, per-ability permission checks, dangerous-action confirmation, admin approval flow, audit logging, and secret redaction. However, no software is bug-free — always back up your site and test on staging first. See the [Security Model](docs/security.md).
+
+### What WordPress version is required?
+
+WordPress 6.9 or later, PHP 8.0 or later.
+
+### Is it free?
+
+Yes. The plugin is licensed under GPL v2 or later, compatible with the WordPress license.
 
 ## Disclaimer
 
@@ -110,6 +232,10 @@ Found a bug? Please report it via [GitHub Issues](https://github.com/wonders4you
 ## Author
 
 - **Tomasz Urban** — [wonders4you.com](https://wonders4you.com/)
+
+## Source Code
+
+Production source code is available at [mpc-clearvibe-wp-source](https://github.com/wonders4you/mpc-clearvibe-wp-source). Fork it, read it, submit PRs.
 
 ## License
 

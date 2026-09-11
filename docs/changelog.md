@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.7.1 (Pre-release)
+
+- MCP bots: scoped application passwords — create per-bot passwords with selected abilities (Settings → ClearVibe AI → MCP bots tab)
+- Snippets engine: multi-engine support (WPCode, Code Snippets, WPCodeBox 2)
+- Translations: updated pl_PL, es_ES, fr_FR for all 7 plugins (1375 msgids, 45 new strings)
+- Security: plugin/theme mutation abilities (activate, deactivate, update, install) now require dangerous-action confirmation
+- Ability normalization: MCP annotations (readonly/destructive/idempotent) copied to top-level meta
+- Cron hardening: malformed schedule/args types handled safely
+- Tests: new AbilityTestCase base class, updated integration tests
+- Docs: agent-guide.md, MCP bots section in README, SEO optimization
+
 ## 0.7.0 (Pre-release)
 
 - First public test build

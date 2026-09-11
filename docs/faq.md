@@ -16,7 +16,11 @@ The plugin has multiple security layers: disabled-by-default dangerous categorie
 
 ### Can I limit what the AI agent can do?
 
-Yes. Use the `users-create-restricted-application-password` ability to create a scoped application password that limits the AI client to specific categories or abilities. You can also enable/disable categories and individual abilities in **Settings → ClearVibe AI**.
+Yes. Use the **MCP bots** tab in **Settings → ClearVibe AI** to create a scoped application password that limits the AI client to specific categories or abilities. You can also enable/disable categories and individual abilities in the Abilities tab. See [MCP Bots](README.md#mcp-bots--scoped-access-for-wordpress) for details.
+
+### What are MCP bots?
+
+MCP bots are scoped application passwords created in **Settings → ClearVibe AI → MCP bots tab**. Each bot gets access only to the abilities you select — for example, a "content writer" bot that can only create and edit posts, or a "shop manager" bot that can only manage WooCommerce products. This is safer than using an unrestricted admin password.
 
 ## Compatibility
 
