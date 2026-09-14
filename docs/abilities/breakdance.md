@@ -1,6 +1,6 @@
-# Breakdance Abilities (44)
+# Breakdance Abilities (48)
 
-The For-Breakdance add-on adds 44 abilities across 6 categories. All abilities are prefixed with `mpc-clearvibe-wp/bd-`. All categories are **disabled by default**.
+The For-Breakdance add-on adds 48 abilities across 6 categories. All abilities are prefixed with `mpc-clearvibe-wp/bd-`. All categories are **disabled by default**.
 
 ## Categories
 
@@ -8,7 +8,7 @@ The For-Breakdance add-on adds 44 abilities across 6 categories. All abilities a
 |----------|-------|-------------|
 | `breakdance` | 4 | Version, info, global settings |
 | `breakdance-templates` | 8 | Templates CRUD, conditions, types |
-| `breakdance-content` | 8 | Builder tree, nodes, render, cache |
+| `breakdance-content` | 12 | Builder tree, nodes, conversion, render, cache, backups |
 | `breakdance-global` | 15 | Global settings, classes, presets, variables, CSS |
 | `breakdance-forms` | 4 | Form submissions (personal data — GDPR warning) |
 | `breakdance-maintenance` | 5 | CSS cache, settings export/import |
@@ -35,18 +35,22 @@ The For-Breakdance add-on adds 44 abilities across 6 categories. All abilities a
 | `bd-update-template-settings` | Update template conditions and type | Write |
 | `bd-list-template-types` | List all available Breakdance template types | Read |
 
-## breakdance-content (8 abilities — disabled by default)
+## breakdance-content (12 abilities — disabled by default)
 
 | Ability | Description | R/W |
 |---------|-------------|-----|
 | `bd-get-builder-tree` | Read and decode the Breakdance element tree for a post | Read |
+| `bd-list-nodes` | Flat list of nodes with id, type, path, label, classes, children count | Read |
 | `bd-update-builder-tree` | Replace the entire element tree for a post | Write |
 | `bd-get-node` | Get a single element node by ID from the tree | Read |
-| `bd-update-node` | Update a single element node by ID in the tree | Write |
+| `bd-update-node` | Update a single element node by ID in the tree (dry_run) | Write |
 | `bd-add-node` | Add a new element node to the tree | Write |
 | `bd-delete-node` | Remove an element node by ID from the tree | Write |
+| `bd-convert-element` | Convert a node to another element type — whitelisted pairs, dry_run report | Write |
 | `bd-render-post` | Server-side render a post/template and return HTML | Read |
 | `bd-clear-post-cache` | Clear the CSS cache for a single post | Write |
+| `bd-list-backups` | List stored builder-tree backups for a post | Read |
+| `bd-restore-backup` | Restore a builder-tree backup (snapshots current state first) | Write |
 
 ## breakdance-global (15 abilities — disabled by default)
 

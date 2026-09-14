@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.0 (Pre-release)
+
+- For-Breakdance add-on: 48 abilities — new `bd-list-nodes` (flat node list) and `bd-convert-element` (whitelisted element conversion with dry-run reports)
+- Breakdance tree access extracted into a dedicated repository; Elementor `_elementor_data` layer extracted the same way
+- Safe Breakdance tree writes through the official API path with backups, dry-run and cache regeneration
+- Shared admin tabs: add-ons register sections via the `mpc_clearvibe_wp_admin_tabs` filter
+- Security: deterministic confirmation gate, audit log redacts app-password UUIDs, backup/restore hardening
+- Fix: empty-object input schemas no longer crash during registration; content-upload-media relative paths; Breakdance 3.x detection
+- Docker: mcp-adapter + WPCode Lite auto-installed, `docker/plugin-zips/` drop-in for premium plugins, `docker/mcp-call.sh` CLI bridge
+
 ## 0.7.1 (Pre-release)
 
 - MCP bots: scoped application passwords — create per-bot passwords with selected abilities (Settings → ClearVibe AI → MCP bots tab)
