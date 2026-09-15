@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.1 (Pre-release)
+
+- Refactor: For-Woo provider split into four domain classes (products, orders, customers, store)
+- Refactor: snippets provider split into per-engine classes (WPCode, Code Snippets, WPCodeBox 2)
+- No functional changes
+
 ## 0.8.0 (Pre-release)
 
 - For-Breakdance add-on: 48 abilities — new `bd-list-nodes` (flat node list) and `bd-convert-element` (whitelisted element conversion with dry-run reports)
