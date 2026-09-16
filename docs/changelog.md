@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.0 (Pre-release)
+
+- Security release — all seven findings from the live-fire penetration test fixed with regression coverage
+- Internal `simple_press_mpc_*` options blocked from generic `options-*` abilities (read, write, list)
+- MCP transport requires `manage_options` by default — low-privilege users can no longer open sessions or enumerate tools (filterable via `mpc_clearvibe_wp_transport_capability` / `mpc_clearvibe_wp_execute_capability`)
+- Strict input schemas enforced (`additionalProperties: false` respected) — unknown fields rejected
+- Approval ops bound to the requesting user
+- Scoped MCP bot passwords confined to the `/mcp/` endpoint — no wp/v2 or XML-RPC access, no self-minting unscoped passwords
+- ACF/Elementor IDOR hardening, Woo credential-overwrite fix, WPCodeBox 2 fatal fix
+- Field-tested on Breakdance 3.x, GeneratePress and Divi 5 sites; For-Elementor add-on not yet site-tested
+- 615 integration tests passing
+
 ## 0.8.1 (Pre-release)
 
 - Refactor: For-Woo provider split into four domain classes (products, orders, customers, store)
